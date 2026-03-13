@@ -1,0 +1,63 @@
+# ── Environment variables — NEVER commit these ────────────────
+.env
+.env.local
+.env.production
+.env.production.local
+.env.development.local
+.env.test.local
+
+# ── Node / npm ────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ── React build output ────────────────────────────────────────
+frontend/build/
+frontend/.env.local
+frontend/.env.production.local
+
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.venv/
+venv/
+env/
+.Python
+
+# ── ML model artifacts — trained locally, not version controlled
+ml-service/*.pkl
+ml-service/*.joblib
+ml-service/trained_model.pkl
+ml-service/category_encoder.pkl
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+logs/
+pids/
+*.pid
+
+# ── OS files ──────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── IDE / editor ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ── Misc ─────────────────────────────────────────────────────
+.cache/
+.temp/

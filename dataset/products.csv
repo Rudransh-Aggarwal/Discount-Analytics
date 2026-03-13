@@ -1,0 +1,76 @@
+product_id,name,category,price,current_discount,units_sold
+P001,Lamp 859,Home,4148,0,41
+P002,Running Shoes 242,Footwear,2806,5,48
+P003,Lamp 704,Home,3858,15,50
+P004,Python Book 195,Books,265,30,63
+P005,Kurta 716,Clothing,2405,30,55
+P006,Tablet 833,Electronics,78563,20,57
+P007,Organizer 325,Home,18356,15,48
+P008,Data Science 928,Books,1406,5,42
+P009,Moisturizer 814,Beauty,226,0,43
+P010,Data Science 259,Books,896,20,50
+P011,T-Shirt 194,Clothing,3257,15,46
+P012,Data Science 967,Books,398,5,43
+P013,Sandals 926,Footwear,5745,15,48
+P014,Speaker 227,Electronics,65217,0,42
+P015,Data Science 949,Books,361,20,55
+P016,Cushion 821,Home,12350,5,44
+P017,Monitor 333,Electronics,11006,5,42
+P018,Serum 975,Beauty,1385,25,57
+P019,Dress 384,Clothing,1327,10,51
+P020,ML Guide 479,Books,947,30,60
+P021,Sandals 818,Footwear,2516,15,47
+P022,Cushion 646,Home,2839,20,52
+P023,Cushion 573,Home,8521,25,56
+P024,ML Guide 801,Books,752,0,41
+P025,Sneakers 334,Footwear,7704,10,51
+P026,Shampoo 510,Beauty,331,5,42
+P027,Running Shoes 680,Footwear,1342,15,52
+P028,Cushion 771,Home,10811,30,60
+P029,Finance 101 246,Books,1010,0,44
+P030,Running Shoes 862,Footwear,1943,5,44
+P031,Cycle 864,Sports,9830,10,45
+P032,Racket 470,Sports,8019,30,59
+P033,Kurta 605,Clothing,1633,25,58
+P034,Keyboard 212,Electronics,11175,30,58
+P035,Dress 710,Clothing,1810,10,46
+P036,Headphones 710,Electronics,55432,15,48
+P037,Data Science 666,Books,1283,30,62
+P038,Serum 798,Beauty,247,5,46
+P039,Cycle 887,Sports,13302,10,44
+P040,Lamp 400,Home,11646,25,61
+P041,Finance 101 103,Books,523,5,43
+P042,Cushion 619,Home,9130,20,50
+P043,Keyboard 754,Electronics,44117,0,45
+P044,Dumbbells 256,Sports,10977,10,46
+P045,Running Shoes 652,Footwear,7046,10,48
+P046,Serum 713,Beauty,2372,5,45
+P047,Sneakers 214,Footwear,4802,25,61
+P048,Sandals 345,Footwear,7998,0,40
+P049,Speaker 180,Electronics,36571,5,76
+P050,Keyboard 170,Electronics,68699,30,115
+P051,Moisturizer 231,Beauty,2381,15,96
+P052,Cushion 371,Home,16074,0,69
+P053,Racket 316,Sports,10938,10,89
+P054,Dumbbells 830,Sports,13374,5,76
+P055,Sandals 548,Footwear,4068,0,71
+P056,Yoga Mat 353,Sports,8397,15,93
+P057,Jacket 121,Clothing,1024,30,113
+P058,Dumbbells 702,Sports,10075,5,81
+P059,T-Shirt 824,Clothing,558,25,101
+P060,Cushion 169,Home,2429,0,73
+P061,Laptop 626,Electronics,48309,20,99
+P062,Dress 319,Clothing,2781,15,93
+P063,Racket 348,Sports,3167,30,104
+P064,Perfume 294,Beauty,2137,10,83
+P065,Monitor 541,Electronics,17704,15,93
+P066,Boots 578,Footwear,4269,10,83
+P067,Serum 162,Beauty,421,25,97
+P068,Python Book 354,Books,894,30,111
+P069,Kurta 559,Clothing,2058,20,99
+P070,Jeans 385,Clothing,3956,30,118
+P071,Python Book 553,Books,711,5,80
+P072,Serum 151,Beauty,2454,10,81
+P073,Lamp 195,Home,18213,20,95
+P074,Moisturizer 516,Beauty,1168,10,83
+P075,ML Guide 985,Books,1185,15,90
