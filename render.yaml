@@ -5,20 +5,14 @@ services:
   # ── ML Service (Python / FastAPI) ─────────────────────────────
   - type: web
     name: discount-advisory-ml
-    runtime: python
-    pythonVersion: "3.11"
     rootDir: ml-service
     region: oregon
     plan: free
-    buildCommand: pip install -r requirements.txt && python -c "from model import load_model; load_model(); print('Model loaded successfully')"
-    # Render sets $PORT automatically — uvicorn must listen on it
-    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    dockerfilePath: Dockerfile
     healthCheckPath: /health
     envVars:
       - key: ML_ALLOWED_ORIGINS
         sync: false # Set AFTER deploying backend — use your backend's .onrender.com URL
-      - key: PYTHON_VERSION
-        value: "3.11"
 
   # ── Node.js Backend (Express) ─────────────────────────────────
   - type: web
