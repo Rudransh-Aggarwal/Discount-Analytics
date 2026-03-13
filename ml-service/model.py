@@ -10,7 +10,7 @@ import os
 MODEL_PATH = "trained_model.pkl"
 ENCODER_PATH = "category_encoder.pkl"
 
-def train_model(data_path="../dataset/sales_data.csv"):
+def train_model(data_path="sales_data.csv"):
     df = pd.read_csv(data_path)
 
     le = LabelEncoder()
