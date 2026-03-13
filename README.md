@@ -4,23 +4,23 @@ An **ML-powered full-stack web application** that recommends **optimal discount 
 
 Users can:
 
-* 📦 Upload their own **product CSV**
-* 🛍 Browse **live products** from DummyJSON
-* 📊 Run **discount simulations**
-* 🤖 Receive **data-driven pricing recommendations**
+- 📦 Upload their own **product CSV**
+- 🛍 Browse **live products** from DummyJSON
+- 📊 Run **discount simulations**
+- 🤖 Receive **data-driven pricing recommendations**
 
 ---
 
 ## ✨ Features
 
-* 🔐 **JWT Authentication** (Admin / Analyst / Viewer roles)
-* 📊 **Analytics Dashboard** with charts
-* 🛍 **Live product catalog** (DummyJSON API)
-* 🤖 **Machine Learning recommendations**
-* 🎯 **Discount simulation engine**
-* 📂 **CSV upload + bulk ML predictions**
-* 📈 **Revenue optimization analysis**
-* 📥 **Export advisory reports**
+- 🔐 **JWT Authentication** (Admin / Analyst / Viewer roles)
+- 📊 **Analytics Dashboard** with charts
+- 🛍 **Live product catalog** (DummyJSON API)
+- 🤖 **Machine Learning recommendations**
+- 🎯 **Discount simulation engine**
+- 📂 **CSV upload + bulk ML predictions**
+- 📈 **Revenue optimization analysis**
+- 📥 **Export advisory reports**
 
 ---
 
@@ -75,7 +75,7 @@ discount-advisory
 │   ├── server.js
 │   └── seed.js
 │
-├── ml-service/               # Python FastAPI service (port 5001)
+├── ml-service/               # Python FastAPI service (port 5002)
 │   ├── model.py
 │   ├── api.py
 │   └── requirements.txt
@@ -95,7 +95,7 @@ Install the following before running the project.
 | Tool    | Version                    |
 | ------- | -------------------------- |
 | Node.js | v18+                       |
-| Python  | 3.9+                       |
+| Python  | 3.11+                      |
 | MongoDB | Community Edition or Atlas |
 | Git     | Latest                     |
 
@@ -143,6 +143,8 @@ Train the model (only once):
 python model.py
 ```
 
+> **Note**: Model files (`trained_model.pkl`, `category_encoder.pkl`) are gitignored and trained locally.
+
 Start the ML service:
 
 ```bash
@@ -152,7 +154,7 @@ python api.py
 Service runs on:
 
 ```
-http://localhost:5001
+http://localhost:5002
 ```
 
 ---
@@ -180,7 +182,7 @@ NODE_ENV=development
 PORT=5000
 MONGO_URI=mongodb://localhost:27017/discount_advisory
 JWT_SECRET=any_long_random_string_at_least_32_chars
-ML_SERVICE_URL=http://localhost:5001
+ML_SERVICE_URL=http://localhost:5002
 CORS_ORIGIN=http://localhost:3000
 ```
 

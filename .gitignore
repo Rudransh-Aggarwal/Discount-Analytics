@@ -31,6 +31,9 @@ env/
 
 # ── ML model artifacts — trained locally, not version controlled
 ml-service/*.joblib
+ml-service/*.pkl
+ml-service/trained_model.pkl
+ml-service/category_encoder.pkl
 
 # ── Logs ──────────────────────────────────────────────────────
 *.log
