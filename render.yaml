@@ -9,7 +9,7 @@ services:
     rootDir: ml-service
     region: oregon
     plan: free
-    buildCommand: pip install -r requirements.txt && python model.py
+    buildCommand: pip install --prefer-binary -r requirements.txt && python model.py
     # Render sets $PORT automatically — uvicorn must listen on it
     startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
