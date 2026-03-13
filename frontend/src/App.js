@@ -17,7 +17,7 @@ function AppLayout({ children }) {
   return (
     <>
       <Navbar />
-      <main style={{ maxWidth: 1200, margin: "0 auto", padding: "28px 24px" }}>
+      <main style={{ maxWidth: 1200, margin: "0 auto", padding: "28px 16px" }}>
         {children}
       </main>
     </>

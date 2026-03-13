@@ -76,7 +76,7 @@ export default function Simulator() {
         <p style={{ color: "#475569", marginTop: 4, fontSize: 14, fontWeight: 300 }}>Predict sales and revenue for any discount level in real time</p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 24, alignItems: "start" }}>
+      <div className="grid-responsive-340-1fr" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, alignItems: "start" }}>
         {/* Control Panel */}
         <div className="card">
           <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 20, fontFamily: "'Syne', sans-serif" }}>Configure</div>

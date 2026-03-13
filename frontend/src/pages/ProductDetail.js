@@ -112,7 +112,7 @@ export default function ProductDetail() {
       </div>
 
       {/* Product Header */}
-      <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: 24, marginBottom: 28 }}>
+      <div className="grid-responsive-280-1fr" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, marginBottom: 28 }}>
         <div style={{
           borderRadius: 12, overflow: "hidden", border: "1px solid #1e1e2e",
           background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center",
@@ -195,7 +195,7 @@ export default function ProductDetail() {
 
       {/* Charts */}
       {validSims.length > 0 && (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
+        <div className="grid-responsive-1-1" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20, marginBottom: 20 }}>
           <div className="card">
             <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "'Syne', sans-serif", marginBottom: 4 }}>Revenue Simulation</div>
             <div style={{ fontSize: 16, fontWeight: 800, color: "#fff", marginBottom: 18, fontFamily: "'Syne', sans-serif" }}>Projected by discount level</div>

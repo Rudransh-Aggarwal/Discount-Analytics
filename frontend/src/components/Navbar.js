@@ -26,11 +26,11 @@ export default function Navbar() {
   return (
     <nav style={{
       background: "#111118", borderBottom: "1px solid #1e1e2e",
-      padding: "0 28px", display: "flex", alignItems: "center",
+      padding: "0 16px", display: "flex", alignItems: "center",
       justifyContent: "space-between", height: 60,
       position: "sticky", top: 0, zIndex: 100,
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <Link to="/" style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{
             width: 32, height: 32,
@@ -44,8 +44,9 @@ export default function Navbar() {
           </span>
         </Link>
 
+        {/* Desktop Links */}
         {user && (
-          <div style={{ display: "flex", gap: 2 }}>
+          <div className="navbar-desktop-links" style={{ display: "flex", gap: 2 }}>
             {links.map(({ to, label }) => {
               const active = pathname === to;
               return (
@@ -65,8 +66,54 @@ export default function Navbar() {
         )}
       </div>
 
+      {/* Mobile Hamburger */}
       {user && (
-        <div style={{ position: "relative" }}>
+        <button className="navbar-mobile-hamburger" onClick={() => setShowMenu((v) => !v)} style={{
+          display: "flex", flexDirection: "column", gap: 3, background: "none", border: "none", cursor: "pointer", padding: 8,
+        }}>
+          <div style={{ width: 20, height: 2, background: "#e2e8f0", borderRadius: 1 }}></div>
+          <div style={{ width: 20, height: 2, background: "#e2e8f0", borderRadius: 1 }}></div>
+          <div style={{ width: 20, height: 2, background: "#e2e8f0", borderRadius: 1 }}></div>
+        </button>
+      )}
+
+      {/* Mobile Menu */}
+      {showMenu && user && (
+        <div style={{
+          position: "absolute", top: "100%", left: 0, right: 0,
+          background: "#111118", borderBottom: "1px solid #1e1e2e",
+          padding: "16px", zIndex: 200,
+        }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {links.map(({ to, label }) => {
+              const active = pathname === to;
+              return (
+                <Link key={to} to={to} onClick={() => setShowMenu(false)} style={{
+                  padding: "8px 12px", borderRadius: 7, fontSize: 14, fontWeight: 500,
+                  color: active ? "#f59e0b" : "#64748b",
+                  background: active ? "#f59e0b12" : "transparent",
+                  transition: "all 0.15s",
+                  display: "flex", alignItems: "center", gap: 6,
+                }}>
+                  {to === "/upload" && <span style={{ fontSize: 12 }}>↑</span>}
+                  {label}
+                </Link>
+              );
+            })}
+            <button onClick={() => { handleLogout(); setShowMenu(false); }}
+              style={{
+                padding: "8px 12px", background: "none", border: "none",
+                textAlign: "left", fontSize: 14, color: "#ef4444",
+                cursor: "pointer", fontWeight: 500, fontFamily: "'DM Sans', sans-serif",
+                borderRadius: 7,
+              }}>→ Sign out</button>
+          </div>
+        </div>
+      )}
+
+      {/* Desktop User Menu */}
+      {user && (
+        <div className="navbar-desktop-user" style={{ position: "relative", display: "block" }}>
           <button onClick={() => setShowMenu((v) => !v)} style={{
             display: "flex", alignItems: "center", gap: 10,
             background: "#16161f", border: "1px solid #2a2a3e",

@@ -215,7 +215,7 @@ export default function DataUpload() {
 
       {/* ── UPLOAD TAB ─────────────────────────────────────── */}
       {activeTab === "upload" && (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div className="grid-responsive-1-1" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20 }}>
           {/* Drop zone */}
           <div
             onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
@@ -296,7 +296,7 @@ export default function DataUpload() {
           ) : (
             <>
               {/* KPI Cards */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 24 }}>
+              <div className="grid-responsive-1-1" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 24 }}>
                 {[
                   { label: "Your Products", value: savedProducts.length, color: "#f59e0b" },
                   { label: "Total Exp. Revenue", value: "$" + Math.round(totalRevenue).toLocaleString(), color: "#10b981" },
@@ -314,7 +314,7 @@ export default function DataUpload() {
               {/* Charts */}
               {withML.length > 0 && (
                 <>
-                  <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 20, marginBottom: 20 }}>
+                  <div className="grid-responsive-2-1" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20, marginBottom: 20 }}>
                     <div className="card">
                       <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "'Syne', sans-serif", marginBottom: 4 }}>Expected Revenue per Product</div>
                       <div style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 18, fontFamily: "'Syne', sans-serif" }}>

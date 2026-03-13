@@ -135,14 +135,14 @@ export default function Home() {
             {hasUploads && <span style={{ color: "#10b981" }}> — including {userProducts.length} from your uploads</span>}
           </p>
         </div>
-        <div style={{ display: "flex", gap: 10 }}>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
           <Link to="/upload" className="btn btn-outline" style={{ fontSize: 14 }}>↑ Upload CSV</Link>
           <Link to="/products" className="btn btn-primary">Browse Catalog →</Link>
         </div>
       </div>
 
       {/* Global KPIs */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 24 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 24 }}>
         <KpiCard label="Total Products" value={totalProducts} icon="📦" color="#f59e0b" sub={`${dummyProducts.length} catalog + ${userProducts.length} uploaded`} />
         <KpiCard label="Avg. Price" value={`$${avgPrice}`} icon="💰" color="#10b981" sub="across all sources" />
         <KpiCard label="Avg. Discount" value={`${avgDiscount}%`} icon="🏷️" color="#6366f1" sub="current listed discount" />
@@ -150,7 +150,7 @@ export default function Home() {
       </div>
 
       {/* Row 1 */}
-      <div style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 20, marginBottom: 20 }}>
+      <div className="grid-responsive-3-2" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20, marginBottom: 20 }}>
         <div className="card">
           <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "'Syne', sans-serif", marginBottom: 4 }}>Avg Rating by Category</div>
           <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", marginBottom: 20, fontFamily: "'Syne', sans-serif" }}>Customer satisfaction trends</div>
@@ -164,7 +164,7 @@ export default function Home() {
       </div>
 
       {/* Row 2 */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, marginBottom: 20 }}>
+      <div className="grid-responsive-1-1-1" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20, marginBottom: 20 }}>
         <div className="card">
           <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "'Syne', sans-serif", marginBottom: 4 }}>Products per Category</div>
           <div style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 18, fontFamily: "'Syne', sans-serif" }}>Count distribution</div>
@@ -183,7 +183,7 @@ export default function Home() {
       </div>
 
       {/* Row 3 */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, marginBottom: 20 }}>
+      <div className="grid-responsive-1-1-1" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20, marginBottom: 20 }}>
         <div className="card">
           <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "'Syne', sans-serif", marginBottom: 4 }}>Price Distribution</div>
           <div style={{ fontSize: 17, fontWeight: 800, color: "#fff", marginBottom: 18, fontFamily: "'Syne', sans-serif" }}>All products by price band</div>
@@ -234,7 +234,7 @@ export default function Home() {
           </div>
 
           {/* User KPIs */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 20 }}>
+          <div className="grid-responsive-1-1" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 20 }}>
             {[
               { label: "Uploaded Products", value: userProducts.length, color: "#f59e0b" },
               { label: "With ML Advisory", value: userWithML.length, color: "#10b981" },

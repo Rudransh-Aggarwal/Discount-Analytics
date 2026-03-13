@@ -73,7 +73,7 @@ export default function ProductList() {
           style={{
             padding: "9px 14px", borderRadius: 8,
             border: "1px solid #1e1e2e", background: "#111118",
-            fontSize: 14, outline: "none", width: 240, color: "#e2e8f0",
+            fontSize: 14, outline: "none", width: 240, maxWidth: "100%", color: "#e2e8f0",
             fontFamily: "'DM Sans', sans-serif",
           }}
         />
