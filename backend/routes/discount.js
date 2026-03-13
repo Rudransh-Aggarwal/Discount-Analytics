@@ -3,6 +3,7 @@ const router = express.Router();
 const axios = require("axios");
 
 const ML_SERVICE_URL = process.env.ML_SERVICE_URL || "http://localhost:5001";
+console.log("Using ML_SERVICE_URL:", ML_SERVICE_URL);
 
 // GET /api/discount-advice-direct?productId=1&price=549&category=smartphones
 router.get("/discount-advice-direct", async (req, res) => {
@@ -19,8 +20,26 @@ router.get("/discount-advice-direct", async (req, res) => {
 
     res.json({ success: true, ...mlResponse.data });
   } catch (err) {
+    console.error("Discount advice error", {
+      mlUrl: ML_SERVICE_URL,
+      message: err.message,
+      code: err.code,
+      status: err.response?.status,
+      data: err.response?.data,
+    });
+
     if (err.code === "ECONNREFUSED")
-      return res.status(503).json({ success: false, error: "ML service unavailable" });
+      return res.status(503).json({
+        success: false,
+        error: `Unable to reach ML service at ${ML_SERVICE_URL}`,
+      });
+
+    if (err.response)
+      return res.status(err.response.status || 500).json({
+        success: false,
+        error: err.response.data?.error || err.response.data || err.message,
+      });
+
     res.status(500).json({ success: false, error: err.message });
   }
 });
@@ -47,8 +66,26 @@ router.post("/simulate-discount", async (req, res) => {
       predicted_revenue: mlResponse.data.predicted_revenue,
     });
   } catch (err) {
+    console.error("Discount simulation error", {
+      mlUrl: ML_SERVICE_URL,
+      message: err.message,
+      code: err.code,
+      status: err.response?.status,
+      data: err.response?.data,
+    });
+
     if (err.code === "ECONNREFUSED")
-      return res.status(503).json({ success: false, error: "ML service unavailable" });
+      return res.status(503).json({
+        success: false,
+        error: `Unable to reach ML service at ${ML_SERVICE_URL}`,
+      });
+
+    if (err.response)
+      return res.status(err.response.status || 500).json({
+        success: false,
+        error: err.response.data?.error || err.response.data || err.message,
+      });
+
     res.status(500).json({ success: false, error: err.message });
   }
 });
