@@ -112,22 +112,9 @@ def predict_units(price: float, discount: float, category: str, model=None, le=N
     if model is None or le is None:
         model, le = load_model()
 
+    # `le` is a dict mapping category to integer encoding
     cat_enc = le.get(category, 0)
     X = np.array([[price, discount, cat_enc]], dtype=float)
-    prediction = model.predict(X)[0]
-    return max(0, round(float(prediction), 2))
-
-
-def predict_units(price: float, discount: float, category: str, model=None, le=None):
-    if model is None or le is None:
-        model, le = load_model()
-
-    try:
-        cat_enc = le.transform([category])[0]
-    except ValueError:
-        cat_enc = 0  # fallback for unknown category
-
-    X = np.array([[price, discount, cat_enc]])
     prediction = model.predict(X)[0]
     return max(0, round(float(prediction), 2))
 

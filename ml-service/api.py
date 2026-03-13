@@ -107,5 +107,9 @@ def retrain():
 
 # Only used locally — Render uses the startCommand in render.yaml
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5001))
-    uvicorn.run("api:app", host="0.0.0.0", port=port, reload=True)
+    # Use a less-common default port locally to avoid conflicts with other services.
+    port = int(os.getenv("PORT", 5002))
+    # Disable auto-reload by default to keep the process running cleanly.
+    # Set UVICORN_RELOAD=true if you want reload behavior locally.
+    reload_flag = os.getenv("UVICORN_RELOAD", "false").lower() in ["1", "true", "yes"]
+    uvicorn.run("api:app", host="0.0.0.0", port=port, reload=reload_flag)
