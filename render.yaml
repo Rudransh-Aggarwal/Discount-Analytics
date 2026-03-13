@@ -6,7 +6,7 @@ services:
   - type: web
     name: discount-advisory-ml
     runtime: python
-    pythonVersion: 3.11
+    pythonVersion: "3.11"
     rootDir: ml-service
     region: oregon
     plan: free
@@ -17,6 +17,8 @@ services:
     envVars:
       - key: ML_ALLOWED_ORIGINS
         sync: false # Set AFTER deploying backend — use your backend's .onrender.com URL
+      - key: PYTHON_VERSION
+        value: "3.11"
 
   # ── Node.js Backend (Express) ─────────────────────────────────
   - type: web
