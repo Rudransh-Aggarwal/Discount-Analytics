@@ -37,7 +37,11 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB");
     const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
+    app.listen(PORT, () => {
+      console.log(`Backend running on http://localhost:${PORT}`);
+      console.log(`ML service URL: ${process.env.ML_SERVICE_URL || "http://localhost:5001"}`);
+      console.log(`CORS origin (frontend): ${process.env.CORS_ORIGIN || "http://localhost:3000"}`);
+    });
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
