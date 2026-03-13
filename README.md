@@ -1,140 +1,180 @@
-# Discount Advisory Dashboard
+# 🧠 Discount Advisory Dashboard
 
-An ML-powered full-stack web app that recommends optimal discount strategies for products based on historical sales data. Upload your own product CSV, browse live products from DummyJSON, run discount simulations, and get data-driven pricing recommendations.
+An **ML-powered full-stack web application** that recommends **optimal discount strategies** for products using historical sales data.
 
----
+Users can:
 
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, Chart.js, React Router v6 |
-| Backend | Node.js 18+, Express, MongoDB, JWT auth |
-| ML Service | Python 3.11, FastAPI, scikit-learn (Random Forest) |
-| Database | MongoDB (local or MongoDB Atlas) |
-| External API | DummyJSON (free, no key needed) |
+* 📦 Upload their own **product CSV**
+* 🛍 Browse **live products** from DummyJSON
+* 📊 Run **discount simulations**
+* 🤖 Receive **data-driven pricing recommendations**
 
 ---
 
-## Project Structure
+## ✨ Features
+
+* 🔐 **JWT Authentication** (Admin / Analyst / Viewer roles)
+* 📊 **Analytics Dashboard** with charts
+* 🛍 **Live product catalog** (DummyJSON API)
+* 🤖 **Machine Learning recommendations**
+* 🎯 **Discount simulation engine**
+* 📂 **CSV upload + bulk ML predictions**
+* 📈 **Revenue optimization analysis**
+* 📥 **Export advisory reports**
+
+---
+
+# 🧰 Tech Stack
+
+| Layer            | Technology                          |
+| ---------------- | ----------------------------------- |
+| **Frontend**     | React 18, Chart.js, React Router v6 |
+| **Backend**      | Node.js 18+, Express                |
+| **ML Service**   | Python 3.11, FastAPI, scikit-learn  |
+| **Database**     | MongoDB (Local / Atlas)             |
+| **Auth**         | JWT                                 |
+| **External API** | DummyJSON                           |
+
+---
+
+# 🗂 Project Structure
 
 ```
-discount-advisory/
+discount-advisory
 │
-├── frontend/                   # React app (port 3000)
-│   ├── public/
-│   └── src/
-│       ├── pages/
-│       │   ├── Home.js         # Analytics dashboard
-│       │   ├── Login.js        # Auth
-│       │   ├── Signup.js       # Auth
-│       │   ├── ProductList.js  # Live product catalog (DummyJSON)
-│       │   ├── ProductDetail.js# Product + ML advisory
-│       │   ├── Simulator.js    # Manual discount simulator
-│       │   └── DataUpload.js   # CSV upload + bulk predictions
-│       ├── components/
-│       │   ├── Navbar.js
-│       │   └── ProtectedRoute.js
-│       └── utils/
-│           ├── api.js          # Axios config + all API calls
-│           └── AuthContext.js  # JWT auth state
+├── frontend/                 # React app (port 3000)
+│   ├── pages/
+│   │   ├── Home.js
+│   │   ├── Login.js
+│   │   ├── Signup.js
+│   │   ├── ProductList.js
+│   │   ├── ProductDetail.js
+│   │   ├── Simulator.js
+│   │   └── DataUpload.js
+│   │
+│   ├── components/
+│   │   ├── Navbar.js
+│   │   └── ProtectedRoute.js
+│   │
+│   └── utils/
+│       ├── api.js
+│       └── AuthContext.js
 │
-├── backend/                    # Node.js API (port 5000)
+├── backend/                  # Node.js API (port 5000)
 │   ├── models/
 │   │   ├── User.js
 │   │   ├── Product.js
 │   │   └── Sale.js
+│   │
 │   ├── routes/
-│   │   ├── auth.js             # /api/auth/register, /login, /me
-│   │   ├── discount.js         # /api/discount-advice-direct, /simulate-discount
-│   │   ├── products.js         # /api/products
-│   │   └── sales.js            # /api/sales
+│   │   ├── auth.js
+│   │   ├── discount.js
+│   │   ├── products.js
+│   │   └── sales.js
+│   │
 │   ├── server.js
-│   ├── seed.js                 # Loads CSV data into MongoDB
-│   └── .env.example
+│   └── seed.js
 │
-├── ml-service/                 # Python FastAPI (port 5001)
-│   ├── model.py                # Random Forest training + prediction logic
-│   ├── api.py                  # FastAPI endpoints
+├── ml-service/               # Python FastAPI service (port 5001)
+│   ├── model.py
+│   ├── api.py
 │   └── requirements.txt
 │
 └── dataset/
-    ├── products.csv            # 75 products (training data)
-    ├── sales_data.csv          # 3,600 sales records (training data)
-    └── sample_upload.csv       # Sample file to test the Upload CSV feature
+    ├── products.csv
+    ├── sales_data.csv
+    └── sample_upload.csv
 ```
 
 ---
 
-## Prerequisites
+# ⚙️ Prerequisites
 
-Make sure the following are installed before you begin:
+Install the following before running the project.
 
-- **Node.js** v18 or higher — https://nodejs.org
-- **Python** 3.9 or higher — https://python.org
-- **MongoDB** Community Edition (local) — https://www.mongodb.com/try/download/community
-  - Or use a free **MongoDB Atlas** cloud cluster — https://cloud.mongodb.com
-- **Git** — https://git-scm.com
+| Tool    | Version                    |
+| ------- | -------------------------- |
+| Node.js | v18+                       |
+| Python  | 3.9+                       |
+| MongoDB | Community Edition or Atlas |
+| Git     | Latest                     |
 
-Verify your versions:
+Check installation:
+
 ```bash
-node -v       # should be v18+
-python --version  # should be 3.9+
-mongod --version  # if running locally
+node -v
+python --version
+mongod --version
 ```
 
 ---
 
-## Running Locally
+# 🚀 Running the Project Locally
 
-You need **3 terminals** running simultaneously.
+The app requires **3 running services**:
 
-### Step 1 — Clone the repo
+1️⃣ ML Service
+2️⃣ Backend API
+3️⃣ Frontend React App
+
+---
+
+# 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/yourusername/discount-advisory.git
+
 cd discount-advisory
 ```
 
 ---
 
-### Step 2 — ML Service setup
+# 2️⃣ ML Service Setup
 
 ```bash
 cd ml-service
+
 pip install -r requirements.txt
 ```
 
-Train the model (only needs to be done once — creates `trained_model.pkl`):
+Train the model (only once):
+
 ```bash
 python model.py
 ```
 
 Start the ML service:
+
 ```bash
 python api.py
-# ✓ Uvicorn running on http://0.0.0.0:5001
 ```
 
-> **Keep this terminal running.**
+Service runs on:
+
+```
+http://localhost:5001
+```
 
 ---
 
-### Step 3 — Backend setup
+# 3️⃣ Backend Setup
 
-Open a new terminal:
+Open **a new terminal**
 
 ```bash
 cd backend
+
 npm install
 ```
 
-Create your `.env` file:
+Create environment file:
+
 ```bash
 cp .env.example .env
 ```
 
-Open `backend/.env` and fill in the values:
+Edit `.env`
+
 ```env
 NODE_ENV=development
 PORT=5000
@@ -144,177 +184,307 @@ ML_SERVICE_URL=http://localhost:5001
 CORS_ORIGIN=http://localhost:3000
 ```
 
-> If using **MongoDB Atlas** instead of local MongoDB, replace `MONGO_URI` with your Atlas connection string:
-> `mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/discount_advisory`
+Seed the database:
 
-Seed the database (loads `dataset/products.csv` and `dataset/sales_data.csv` into MongoDB):
 ```bash
 node seed.js
-# ✓ Seeded 75 products
-# ✓ Seeded 3600 sales records
 ```
 
-Start the backend:
+Start backend server:
+
 ```bash
 npm run dev
-# ✓ Connected to MongoDB
-# ✓ Backend running on port 5000
 ```
 
-> **Keep this terminal running.**
+Backend runs on:
+
+```
+http://localhost:5000
+```
 
 ---
 
-### Step 4 — Frontend setup
+# 4️⃣ Frontend Setup
 
-Open a third terminal:
+Open **third terminal**
 
 ```bash
 cd frontend
+
 npm install
-```
 
-Start the React app:
-```bash
 npm start
-# ✓ Compiled successfully
-# ✓ App running at http://localhost:3000
 ```
 
-Open **http://localhost:3000** in your browser.
+Frontend runs at:
+
+```
+http://localhost:3000
+```
 
 ---
 
-## First Time Setup
+# 👤 First Time Setup
 
-1. Go to http://localhost:3000/signup
-2. Create an account — pick any role (Admin / Analyst / Viewer)
-3. You're redirected to the Home dashboard automatically
+1. Open
+
+```
+http://localhost:3000/signup
+```
+
+2. Create account
+
+3. Choose role
+
+```
+Admin
+Analyst
+Viewer
+```
+
+You will be redirected to the **dashboard**.
 
 ---
 
-## Pages & Features
+# 📄 Pages & Features
 
-| Page | URL | Description |
-|------|-----|-------------|
-| Home | `/` | Analytics dashboard — live charts from DummyJSON API |
-| Products | `/products` | Browse 100 real products with images, search, filters |
-| Product Detail | `/product/:id` | ML advisory + 7-level discount simulation for any product |
-| Simulator | `/simulator` | Manually pick any product + discount and get instant prediction |
-| Upload CSV | `/upload` | Upload your own product data and get bulk ML recommendations |
-| Login | `/login` | Sign in |
-| Signup | `/signup` | Create account |
+| Page           | Route          | Description                     |
+| -------------- | -------------- | ------------------------------- |
+| Dashboard      | `/`            | Analytics dashboard with charts |
+| Products       | `/products`    | Live product catalog            |
+| Product Detail | `/product/:id` | ML advisory for product         |
+| Simulator      | `/simulator`   | Test discount scenarios         |
+| Upload CSV     | `/upload`      | Bulk ML predictions             |
+| Login          | `/login`       | User authentication             |
+| Signup         | `/signup`      | Account creation                |
 
 ---
 
-## Testing the CSV Upload Feature
+# 📂 CSV Upload Feature
 
-A sample CSV file is included at `dataset/sample_upload.csv` to test the Upload feature:
+Sample file included:
+
+```
+dataset/sample_upload.csv
+```
+
+Example format:
 
 ```csv
 name,price,category,brand,current_discount,stock
 Wireless Headphones,2999,Electronics,Sony,10,50
 Running Shoes,3499,Footwear,Nike,5,120
 Cotton T-Shirt,799,Clothing,H&M,0,200
-Python Programming Book,599,Books,OReilly,0,80
-Yoga Mat,1299,Sports,Decathlon,15,60
-Scented Candle,499,Home,IKEA,0,150
-Face Serum,1199,Beauty,Minimalist,20,90
-Gaming Laptop,75000,Electronics,Asus,8,25
-Denim Jacket,2499,Clothing,Levis,12,75
-Basketball Shoes,4999,Footwear,Adidas,0,40
 ```
 
-**How to use:**
-1. Go to **Upload CSV** in the navbar
-2. Drag and drop `dataset/sample_upload.csv` onto the upload area, or click to browse
-3. The ML service runs predictions for all products automatically
-4. View the analytics charts, KPI cards, and recommendations table
-5. Click **Download Results CSV** to export the full advisory report
+### Required Columns
 
-**Required columns:** `name`, `price`, `category`
+```
+name
+price
+category
+```
 
-**Optional columns:** `brand`, `current_discount`, `stock`
+### Optional
 
-**Supported category values:** `Electronics`, `Clothing`, `Footwear`, `Books`, `Sports`, `Home`, `Beauty`
+```
+brand
+current_discount
+stock
+```
 
----
+Supported categories:
 
-## API Reference
-
-### Auth — `/api/auth`
-
-| Method | Endpoint | Body | Description |
-|--------|----------|------|-------------|
-| POST | `/api/auth/register` | `{ name, email, password, role }` | Create account |
-| POST | `/api/auth/login` | `{ email, password }` | Login, returns JWT |
-| GET | `/api/auth/me` | — | Get current user (requires Bearer token) |
-
-### Discount — `/api`
-
-| Method | Endpoint | Params / Body | Description |
-|--------|----------|---------------|-------------|
-| GET | `/api/discount-advice-direct` | `?productId=&price=&category=` | Get ML recommendation for a product |
-| POST | `/api/simulate-discount` | `{ product_id, price, category, discount }` | Predict units + revenue for a specific discount |
-
-### ML Service — `http://localhost:5001`
-
-| Method | Endpoint | Body | Description |
-|--------|----------|------|-------------|
-| POST | `/predict` | `{ product_id, price, discount, category }` | Predict units sold |
-| POST | `/advise` | `{ product_id, price, category }` | Get best discount across all levels |
-| GET | `/health` | — | Check if model is loaded |
-| POST | `/retrain` | — | Retrain model from scratch |
+```
+Electronics
+Clothing
+Footwear
+Books
+Sports
+Home
+Beauty
+```
 
 ---
 
-## ML Model Details
+# 🔌 API Reference
 
-- **Algorithm:** Random Forest Regressor (100 trees)
-- **Training data:** 3,600 sales records across 75 products and 7 categories
-- **Features:** `price`, `discount %`, `category`
-- **Target:** `units_sold`
-- **Advisory logic:** Simulates discounts at 0%, 5%, 10%, 15%, 20%, 25%, 30% — picks the level with the highest projected revenue (`effective_price × predicted_units`)
+## Auth
 
----
+`/api/auth`
 
-## Common Errors
-
-**`ECONNREFUSED` on login/signup**
-→ Your backend is not running. Start it with `npm run dev` in the `backend/` folder.
-
-**`ML service unavailable`**
-→ Your Python service is not running. Run `python api.py` in the `ml-service/` folder.
-
-**`MONGO_URI is not set`**
-→ You haven't created `backend/.env`. Run `cp .env.example .env` and fill in the values.
-
-**`ModuleNotFoundError` in Python**
-→ Dependencies not installed. Run `pip install -r requirements.txt` in `ml-service/`.
-
-**`Model not found, training now...`**
-→ Normal on first run. The model trains automatically, or run `python model.py` manually first.
-
-**Charts not loading on Home page**
-→ DummyJSON API is a free public API — if it's temporarily down, wait a moment and refresh.
+| Method | Endpoint    | Description     |
+| ------ | ----------- | --------------- |
+| POST   | `/register` | Create account  |
+| POST   | `/login`    | Login           |
+| GET    | `/me`       | Get logged user |
 
 ---
 
-## Environment Variables
+## Discount Engine
 
-### `backend/.env`
+`/api`
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `NODE_ENV` | Yes | `development` or `production` |
-| `PORT` | No | Backend port (default: 5000) |
-| `MONGO_URI` | Yes | MongoDB connection string |
-| `JWT_SECRET` | Yes | Secret for signing JWTs — min 32 chars |
-| `ML_SERVICE_URL` | Yes | URL of the Python ML service |
-| `CORS_ORIGIN` | Yes | Frontend URL allowed by CORS |
+| Method | Endpoint                  | Description       |
+| ------ | ------------------------- | ----------------- |
+| GET    | `/discount-advice-direct` | ML recommendation |
+| POST   | `/simulate-discount`      | Simulate revenue  |
 
-### `frontend/.env` (optional in dev)
+---
 
-| Variable | Description |
-|----------|-------------|
-| `REACT_APP_API_URL` | Backend URL — leave empty in dev (CRA proxy handles it) |
+## ML Service
+
+```
+http://localhost:5001
+```
+
+| Method | Endpoint   | Description        |
+| ------ | ---------- | ------------------ |
+| POST   | `/predict` | Predict units sold |
+| POST   | `/advise`  | Best discount      |
+| GET    | `/health`  | Service health     |
+| POST   | `/retrain` | Retrain model      |
+
+---
+
+# 🤖 ML Model
+
+| Property   | Value                   |
+| ---------- | ----------------------- |
+| Algorithm  | Random Forest Regressor |
+| Trees      | 100                     |
+| Dataset    | 3600 sales records      |
+| Products   | 75                      |
+| Categories | 7                       |
+
+### Features
+
+```
+price
+discount
+category
+```
+
+### Target
+
+```
+units_sold
+```
+
+### Advisory Logic
+
+Simulates discounts:
+
+```
+0%
+5%
+10%
+15%
+20%
+25%
+30%
+```
+
+Chooses the **discount with highest predicted revenue**.
+
+---
+
+# ⚠️ Common Errors
+
+### ECONNREFUSED
+
+Backend not running.
+
+```bash
+npm run dev
+```
+
+---
+
+### ML Service Unavailable
+
+Run:
+
+```bash
+python api.py
+```
+
+---
+
+### MONGO_URI Not Set
+
+Create `.env` file.
+
+---
+
+### Python Module Error
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### Model Not Found
+
+Run:
+
+```bash
+python model.py
+```
+
+---
+
+### Charts Not Loading
+
+DummyJSON API may be temporarily down.
+
+---
+
+# 🔐 Environment Variables
+
+## Backend `.env`
+
+| Variable       | Description              |
+| -------------- | ------------------------ |
+| NODE_ENV       | development / production |
+| PORT           | backend port             |
+| MONGO_URI      | MongoDB connection       |
+| JWT_SECRET     | JWT secret               |
+| ML_SERVICE_URL | ML service URL           |
+| CORS_ORIGIN    | frontend URL             |
+
+---
+
+## Frontend `.env`
+
+(optional)
+
+```
+REACT_APP_API_URL
+```
+
+---
+
+# 📊 System Architecture
+
+```
+React Frontend
+      │
+      ▼
+Node.js Backend API
+      │
+      ▼
+Python ML Service
+      │
+      ▼
+MongoDB Database
+```
+
+---
+
+# 📜 License
+
+MIT License
