@@ -1,23 +1,27 @@
+import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
 from model import predict_units, get_best_discount, load_model, train_model
-import os
 
 app = FastAPI(title="Discount Advisory ML Service", version="1.0.0")
 
+# Render sets PORT automatically — never hardcode it
+ALLOWED_ORIGINS = os.getenv(
+    "ML_ALLOWED_ORIGINS",
+    "http://localhost:5000,http://backend:5000"
+).split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_methods=["POST", "GET"],
     allow_headers=["*"],
 )
 
-# Load model on startup
 model_obj, le_obj = None, None
-
 
 @app.on_event("startup")
 async def startup_event():
@@ -25,13 +29,11 @@ async def startup_event():
     model_obj, le_obj = load_model()
     print("ML model loaded successfully")
 
-
 class PredictRequest(BaseModel):
     product_id: str
     price: float
     discount: float
     category: str
-
 
 class PredictResponse(BaseModel):
     product_id: str
@@ -39,19 +41,16 @@ class PredictResponse(BaseModel):
     predicted_units_sold: float
     predicted_revenue: float
 
-
 class AdviceRequest(BaseModel):
     product_id: str
     price: float
     category: str
     discount_range: Optional[List[float]] = None
 
-
 class SimulationResult(BaseModel):
     discount: float
     predicted_units: float
     predicted_revenue: float
-
 
 class AdviceResponse(BaseModel):
     product_id: str
@@ -60,11 +59,9 @@ class AdviceResponse(BaseModel):
     expected_revenue: float
     simulations: List[SimulationResult]
 
-
 @app.get("/health")
 def health_check():
     return {"status": "ok", "model_loaded": model_obj is not None}
-
 
 @app.post("/predict", response_model=PredictResponse)
 def predict(req: PredictRequest):
@@ -80,7 +77,6 @@ def predict(req: PredictRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @app.post("/advise", response_model=AdviceResponse)
 def advise(req: AdviceRequest):
     try:
@@ -95,7 +91,6 @@ def advise(req: AdviceRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @app.post("/retrain")
 def retrain():
     global model_obj, le_obj
@@ -105,6 +100,7 @@ def retrain():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
+# Only used locally — Render uses the startCommand in render.yaml
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=5001)
+    port = int(os.getenv("PORT", 5001))
+    uvicorn.run("api:app", host="0.0.0.0", port=port, reload=True)

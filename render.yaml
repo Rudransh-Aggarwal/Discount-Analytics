@@ -1,0 +1,40 @@
+# Render Blueprint — auto-deploys both services from your GitHub repo
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ── ML Service (Python / FastAPI) ─────────────────────────────
+  - type: web
+    name: discount-advisory-ml
+    runtime: python
+    rootDir: ml-service
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt && python model.py
+    # Render sets $PORT automatically — uvicorn must listen on it
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: ML_ALLOWED_ORIGINS
+        sync: false  # Set AFTER deploying backend — use your backend's .onrender.com URL
+
+  # ── Node.js Backend (Express) ─────────────────────────────────
+  - type: web
+    name: discount-advisory-backend
+    runtime: node
+    rootDir: backend
+    region: oregon
+    plan: free
+    buildCommand: npm ci --only=production
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false  # Your MongoDB Atlas connection string
+      - key: JWT_SECRET
+        generateValue: true  # Render generates a secure random value
+      - key: ML_SERVICE_URL
+        sync: false  # Your ML service URL — e.g. https://discount-advisory-ml.onrender.com
+      - key: CORS_ORIGIN
+        sync: false  # Your Vercel frontend URL — e.g. https://your-app.vercel.app
