@@ -30,10 +30,7 @@ env/
 .Python
 
 # ── ML model artifacts — trained locally, not version controlled
-ml-service/*.pkl
 ml-service/*.joblib
-ml-service/trained_model.pkl
-ml-service/category_encoder.pkl
 
 # ── Logs ──────────────────────────────────────────────────────
 *.log
