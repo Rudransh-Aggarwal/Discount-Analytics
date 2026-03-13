@@ -11,41 +11,63 @@ MODEL_PATH = "trained_model.pkl"
 ENCODER_PATH = "category_encoder.pkl"
 
 def train_model(data_path="sales_data.csv"):
-    df = pd.read_csv(data_path)
+    try:
+        print("Starting model training...")
+        df = pd.read_csv(data_path)
+        print(f"Loaded {len(df)} sales records")
 
-    le = LabelEncoder()
-    # We need category info — merge with products
-    products_path = data_path.replace("sales_data.csv", "products.csv")
-    products_df = pd.read_csv(products_path)
-    df = df.merge(products_df[["product_id", "category"]], on="product_id", how="left")
+        # We need category info — merge with products
+        products_path = data_path.replace("sales_data.csv", "products.csv")
+        products_df = pd.read_csv(products_path)
+        print(f"Loaded {len(products_df)} products")
 
-    df["category_enc"] = le.fit_transform(df["category"].fillna("Unknown"))
+        df = df.merge(products_df[["product_id", "category"]], on="product_id", how="left")
+        print(f"Merged data has {len(df)} rows")
 
-    X = df[["price", "discount", "category_enc"]]
-    y = df["units_sold"]
+        # Handle missing categories
+        df["category"] = df["category"].fillna("Unknown")
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        le = LabelEncoder()
+        df["category_enc"] = le.fit_transform(df["category"])
 
-    model = RandomForestRegressor(n_estimators=100, random_state=42)
-    model.fit(X_train, y_train)
+        X = df[["price", "discount", "category_enc"]]
+        y = df["units_sold"]
 
-    preds = model.predict(X_test)
-    mae = mean_absolute_error(y_test, preds)
-    print(f"Model trained. MAE: {mae:.2f}")
+        print(f"Training data shape: {X.shape}")
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    joblib.dump(model, MODEL_PATH)
-    joblib.dump(le, ENCODER_PATH)
-    print(f"Model saved to {MODEL_PATH}")
-    return model, le
+        model = RandomForestRegressor(n_estimators=100, random_state=42)
+        model.fit(X_train, y_train)
 
+        preds = model.predict(X_test)
+        mae = mean_absolute_error(y_test, preds)
+        print(f"Model trained successfully. MAE: {mae:.2f}")
+
+        joblib.dump(model, MODEL_PATH)
+        joblib.dump(le, ENCODER_PATH)
+        print(f"Model saved to {MODEL_PATH}")
+        return model, le
+
+    except Exception as e:
+        print(f"Error training model: {e}")
+        raise
 
 def load_model():
-    if not os.path.exists(MODEL_PATH):
-        print("Model not found, training now...")
+    try:
+        if not os.path.exists(MODEL_PATH) or not os.path.exists(ENCODER_PATH):
+            print("Model files not found, training new model...")
+            return train_model()
+
+        print("Loading existing model...")
+        model = joblib.load(MODEL_PATH)
+        le = joblib.load(ENCODER_PATH)
+        print("Model loaded successfully")
+        return model, le
+
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        print("Attempting to retrain model...")
         return train_model()
-    model = joblib.load(MODEL_PATH)
-    le = joblib.load(ENCODER_PATH)
-    return model, le
 
 
 def predict_units(price: float, discount: float, category: str, model=None, le=None):

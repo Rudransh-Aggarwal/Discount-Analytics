@@ -1,4 +1,5 @@
 import os
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -6,7 +7,19 @@ from typing import List, Optional
 import uvicorn
 from model import predict_units, get_best_discount, load_model, train_model
 
-app = FastAPI(title="Discount Advisory ML Service", version="1.0.0")
+model_obj, le_obj = None, None
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    global model_obj, le_obj
+    model_obj, le_obj = load_model()
+    print("ML model loaded successfully")
+    yield
+    # Shutdown
+    print("Shutting down ML service")
+
+app = FastAPI(title="Discount Advisory ML Service", version="1.0.0", lifespan=lifespan)
 
 # Render sets PORT automatically — never hardcode it
 ALLOWED_ORIGINS = os.getenv(
@@ -20,14 +33,6 @@ app.add_middleware(
     allow_methods=["POST", "GET"],
     allow_headers=["*"],
 )
-
-model_obj, le_obj = None, None
-
-@app.on_event("startup")
-async def startup_event():
-    global model_obj, le_obj
-    model_obj, le_obj = load_model()
-    print("ML model loaded successfully")
 
 class PredictRequest(BaseModel):
     product_id: str

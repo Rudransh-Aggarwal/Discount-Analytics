@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 set -e
+
+echo "Installing Python dependencies..."
 pip install --upgrade pip
-pip install --only-binary=:all: numpy==1.23.5 pandas==1.5.3 scikit-learn==1.2.2 joblib==1.2.0
-pip install fastapi==0.111.0 uvicorn==0.29.0 "pydantic==2.7.1"
+
+# Install packages with better error handling
+pip install -r requirements.txt
+
+echo "Installing additional dependencies if needed..."
+pip install --upgrade setuptools wheel
+
+echo "Loading/verifying ML model..."
+python -c "from model import load_model; load_model(); print('Model ready')"
+
+echo "Build completed successfully"
